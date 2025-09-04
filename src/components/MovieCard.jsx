@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function MovieCard({ movie }) {
   return (
-    <div className="shadow-xl card bg-base-100 ">
+    <div className="shadow-xl card bg-base-100 w-48 h-72">
       <Link
         to={`/movie/${movie.id}`}
         className="relative block overflow-hidden transition rounded shadow group hover:scale-105"

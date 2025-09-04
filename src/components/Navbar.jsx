@@ -10,7 +10,7 @@ function Navbar({ onSearch }) {
   };
 
   return (
-    <div className="flex items-center justify-between px-4 py-4 mx-auto navbar bg-base-100">
+    <div className="flex items-center justify-between px-4 py-4 mx-auto navbar bg-base-100 shadow-lg">
       <div>
         <Link to="/" className="text-xl btn btn-ghost hover:text-red-500/80">
           StreamX
