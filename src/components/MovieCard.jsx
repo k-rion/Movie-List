@@ -3,16 +3,22 @@ import { Link } from "react-router-dom";
 
 export default function MovieCard({ movie }) {
   return (
-    <div className="shadow-xl card bg-base-100 w-48 h-72">
+    <div className="w-48 shadow-xl card bg-base-100 h-72">
       <Link
         to={`/movie/${movie.id}`}
         className="relative block overflow-hidden transition rounded shadow group hover:scale-105"
       >
-        <img
-          src={movie.poster}
-          alt={movie.title}
-          className="w-full aspect-[2/3] object-cover rounded "
-        />
+        {movie.poster ? (
+          <img
+            src={movie.poster}
+            alt={movie.title}
+            className="w-full aspect-[2/3] object-cover rounded "
+          />
+        ) : (
+          <div className="w-full aspect-[2/3] bg-gray-700 rounded flex items-center justify-center text-white text-sm">
+            No Image
+          </div>
+        )}
 
         {/* Overlay with title (initially hidden) */}
         <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 bg-black/70 group-hover:opacity-100">

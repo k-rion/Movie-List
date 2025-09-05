@@ -15,6 +15,14 @@ export default function Home({ movies }) {
     return () => clearInterval(interval);
   }, [movies]);
 
+  if (!movies || movies.length === 0 || !movies[currentIndex]) {
+    return (
+      <div className="flex items-center justify-center h-[80vh] text-white">
+        No movies found.
+      </div>
+    );
+  }
+
   return (
     <>
       {/* Hero Section */}
@@ -36,25 +44,25 @@ export default function Home({ movies }) {
 
         {/* Hero Content */}
         <div className="absolute bottom-0 z-20 max-w-4xl px-6 py-20 text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {movies[currentIndex].title}
+          <h1 className="mb-4 text-4xl font-bold md:text-5xl">
+            {movies[currentIndex]?.title}
           </h1>
           <p className="mb-2">
-            <span className="bg-green-600 px-2 py-1 text-xs rounded">HD</span>{" "}
-            Duration: {movies[currentIndex].runtime || "120"}min • IMDB:{" "}
-            {movies[currentIndex].vote_average?.toFixed(1)} • Year:{" "}
-            {movies[currentIndex].release_date?.split("-")[0]}
+            <span className="px-2 py-1 text-xs bg-green-600 rounded">HD</span>{" "}
+            Duration: {movies[currentIndex]?.runtime || "120"}min • IMDB:{" "}
+            {movies[currentIndex]?.vote_average?.toFixed(1)} • Year:{" "}
+            {movies[currentIndex]?.release_date?.split("-")[0]}
           </p>
-          <p className="max-w-xl text-gray-200 mb-6 line-clamp-3">
-            {movies[currentIndex].overview}
+          <p className="max-w-xl mb-6 text-gray-200 line-clamp-3">
+            {movies[currentIndex]?.overview}
           </p>
-          <button className="btn bg-red-500/80 text-white animate-bounce">
+          <button className="text-white btn bg-red-500/80 animate-bounce">
             <i className="fa-solid fa-play"></i> Watch Now
           </button>
         </div>
 
         {/* Pagination Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
+        <div className="absolute z-30 flex space-x-2 -translate-x-1/2 bottom-6 left-1/2">
           {movies.slice(0, 5).map((_, idx) => (
             <button
               key={idx}
@@ -70,8 +78,8 @@ export default function Home({ movies }) {
       </div>
 
       {/* Trending Section */}
-      <h2 className="ml-6 mt-8 text-xl font-semibold text-white">Trending</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 p-6">
+      <h2 className="mt-8 ml-6 text-xl font-semibold text-white">Trending</h2>
+      <div className="grid grid-cols-2 gap-6 p-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
         {movies.map((movie) => (
           <MovieCard
             key={movie.id}

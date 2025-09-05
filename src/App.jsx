@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -9,26 +9,46 @@ function App() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetchPopularMovies().then(setMovies);
+    fetchPopularMovies()
+      .then((res) => {
+        const data = Array.isArray(res) ? res : res?.results ?? [];
+        setMovies(data);
+      })
+      .catch((err) => {
+        console.error("fetchPopularMovies failed:", err);
+        setMovies([]);
+      });
   }, []);
 
   const handleSearch = async (term) => {
-    if (term.trim() === "") {
-      fetchPopularMovies().then(setMovies);
-    } else {
-      const results = await searchMovies(term);
-      setMovies(results);
+    try {
+      if (term.trim() === "") {
+        fetchPopularMovies()
+          .then((res) =>
+            setMovies(Array.isArray(res) ? res : res?.results ?? [])
+          )
+          .catch((err) => {
+            console.error("fetchPopularMovies failed:", err);
+            setMovies([]);
+          });
+      } else {
+        const results = await searchMovies(term);
+        setMovies(Array.isArray(results) ? results : results?.results ?? []);
+      }
+    } catch (err) {
+      console.error("searchMovies failed:", err);
+      setMovies([]);
     }
   };
 
   return (
-    <Router>
+    <BrowserRouter basename="/Movie-List">
       <Navbar onSearch={handleSearch} />
       <Routes>
         <Route path="/" element={<Home movies={movies} />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
