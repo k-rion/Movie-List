@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { genreMap } from "../api/genre";
 
 function Navbar({ onSearch }) {
   const [term, setTerm] = useState("");
@@ -10,7 +11,7 @@ function Navbar({ onSearch }) {
   };
 
   return (
-    <div className="flex items-center justify-between px-4 py-4 mx-auto navbar bg-base-100 shadow-lg">
+    <div className="flex items-center justify-between px-4 py-4 mx-auto shadow-lg navbar bg-base-100">
       <div>
         <Link to="/" className="text-xl btn btn-ghost hover:text-red-500/80">
           StreamX
@@ -22,18 +23,31 @@ function Navbar({ onSearch }) {
           <Link className="font-medium text-white hover:text-red-400" to="/">
             Home
           </Link>
-          <Link
-            className="font-medium text-white hover:text-red-400"
-            to="/genre"
-          >
-            Genre
-          </Link>
-          <Link
-            className="font-medium text-white hover:text-red-400"
-            to="/favorite"
-          >
-            Favorite
-          </Link>
+
+          {/* Navbar */}
+
+          <div className="relative group">
+            <button className="font-medium text-white hover:text-red-400">Genre</button>
+
+            {/* Dropdown Panel */}
+            <div className="left-0 invisible mt-2 transition-all duration-300 bg-gray-800
+                            opacity-0 absolute group-hover:opacity-100 group-hover:visible 
+                            w-[640px] p-6 rounded-lg shadow-lg z-[9999]"
+              >
+                              
+              <div className="grid grid-cols-3 gap-4">
+                {Object.entries(genreMap).map(([id, name]) => (
+                  <h2
+                    className="block text-gray-300 hover:text-white"
+                    key={id}
+                    to={`/genre${id}`}
+                  >
+                    {name}
+                  </h2>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
