@@ -1,21 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieCard({ movie }) {
+  const navigate = useNavigate();
 
-  
+  const handleClick = () => {
+    navigate(`/movie/${movie.id}`, { state: { movie } });
+  };
 
   return (
-    <div className="w-48 shadow-xl card bg-base-100 h-72">
-      <Link
-        to={`/movie/${movie.id}`}
-        className="relative block overflow-hidden transition rounded shadow group hover:scale-105"
-      >
+    <div 
+      className="w-48 shadow-xl cursor-pointer card bg-base-100 h-72"
+      onClick={handleClick}
+    >
+      <div className="relative block overflow-hidden transition rounded shadow group hover:scale-105">
         {movie.poster ? (
           <img
             src={movie.poster}
             alt={movie.title}
-            className="w-full aspect-[2/3] object-cover rounded "
+            className="w-full aspect-[2/3] object-cover rounded"
           />
         ) : (
           <div className="w-full aspect-[2/3] bg-gray-700 rounded flex items-center justify-center text-white text-sm">
@@ -49,7 +52,7 @@ export default function MovieCard({ movie }) {
             )}
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   );
 }
