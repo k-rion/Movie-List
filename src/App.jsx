@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import { fetchPopularMovies, searchMovies } from "./api/tmdb";
+import GenreMovies from "./components/GenreMovies";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -47,6 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home movies={movies} />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/movie/genre/:id" element={<GenreMovies/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -17,3 +17,24 @@ export async function searchMovies(query) {
   const res = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
   return res.data.results || [];
 }
+
+export async function fetchMoviesByGenre(genreId) {
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/discover/movie`,
+      {
+        params: {
+          api_key: API_KEY,
+          with_genres: genreId,
+          language: "en-US",
+          page: 1
+        }
+      }
+    );
+    return res.data.results || [];
+  } catch (error) {
+    console.error("Error fetching movies by genre:", error);
+    return [];
+  }
+}
+

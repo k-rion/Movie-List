@@ -35,15 +35,15 @@ function Navbar({ onSearch }) {
                             w-[640px] p-6 rounded-lg shadow-lg z-[9999]"
               >
                               
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4 cursor-pointer">
                 {Object.entries(genreMap).map(([id, name]) => (
-                  <h2
+                  <Link
                     className="block text-gray-300 hover:text-white"
                     key={id}
-                    to={`/genre${id}`}
+                    to={`/movie/genre/${id}`}
                   >
                     {name}
-                  </h2>
+                  </Link>
                 ))}
               </div>
             </div>
