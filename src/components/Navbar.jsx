@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { genreMap } from "../api/genre";
+// import { genreMap } from "../api/genre";
 
 function Navbar({ onSearch }) {
   const [term, setTerm] = useState("");
@@ -23,20 +23,20 @@ function Navbar({ onSearch }) {
         </Link>
       </div>
 
-      <div className="flex-2">
+      {/* <div className="flex-2">
         <div className="hidden space-x-8 md:flex">
           <Link className="font-medium text-white hover:text-red-400" to="/">
             Home
           </Link>
 
           {/* Navbar */}
-          <div className="relative group">
+          {/* <div className="relative group">
             <button className="font-medium text-white hover:text-red-400">
               Genre
             </button>
 
             {/* Dropdown Panel */}
-            <div
+            {/* <div
               className="left-0 invisible mt-2 transition-all duration-300 bg-gray-800
                             opacity-0 absolute group-hover:opacity-100 group-hover:visible 
                             w-[640px] p-6 rounded-lg shadow-lg z-[9999]"
@@ -53,9 +53,9 @@ function Navbar({ onSearch }) {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div> */}
+        {/* </div> */} 
+      {/* </div> */}
 
       <form onSubmit={handleSubmit} className="flex gap-4">
         <label className="flex items-center gap-2 input input-bordered">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { genreMap } from "../api/genre";
+import { Link } from "react-router-dom";
 
 export default function Home({ movies }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -192,15 +193,16 @@ export default function Home({ movies }) {
           {Object.entries(genreMap)
             .slice(0, 12)
             .map(([id, name]) => (
-              <div
+              <Link
                 key={id}
+                 to={`/movie/genre/${id}`}
                 className="p-4 transition-all bg-gray-700 rounded-lg cursor-pointer hover:bg-red-600"
               >
                 <div className="text-center">
                   <i className="mb-2 text-2xl fa-solid fa-film"></i>
                   <h3 className="text-sm font-medium text-white">{name}</h3>
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>
