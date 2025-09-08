@@ -11,9 +11,7 @@ export default function Home({ movies }) {
     let interval;
     if (isPlaying) {
       interval = setInterval(() => {
-        setCurrentIndex((prev) =>
-          prev === movies.length - 1 ? 0 : prev + 1
-        );
+        setCurrentIndex((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
       }, 6000);
     }
     return () => clearInterval(interval);
@@ -115,16 +113,7 @@ export default function Home({ movies }) {
           </button>
         </div>
 
-        {/* Progress Bar */}
-        <div className="absolute bottom-0 left-0 z-30 w-full h-1 bg-gray-700">
-          <div 
-            className="h-full transition-all ease-linear bg-red-600 duration-6000"
-            style={{ 
-              width: isPlaying ? '100%' : '0%',
-              animationPlayState: isPlaying ? 'running' : 'paused'
-            }}
-          ></div>
-        </div>
+
 
         {/* Pagination Dots */}
         <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-20 left-1/2">
@@ -145,8 +134,16 @@ export default function Home({ movies }) {
                     : "bg-gray-500 hover:bg-gray-400"
                 }`}
               ></div>
-              <span className={`mt-2 text-xs font-medium transition-opacity ${idx === currentIndex ? 'text-white opacity-100' : 'text-gray-400 opacity-0 group-hover:opacity-100'}`}>
-                {movie.title.length > 12 ? movie.title.substring(0, 12) + '...' : movie.title}
+              <span
+                className={`mt-2 text-xs font-medium transition-opacity ${
+                  idx === currentIndex
+                    ? "text-white opacity-100"
+                    : "text-gray-400 opacity-0 group-hover:opacity-100"
+                }`}
+              >
+                {movie.title.length > 12
+                  ? movie.title.substring(0, 12) + "..."
+                  : movie.title}
               </span>
             </button>
           ))}
@@ -188,22 +185,29 @@ export default function Home({ movies }) {
 
       {/* Categories Section */}
       <div className="px-6 py-12 bg-gray-800">
-        <h2 className="mb-8 text-3xl font-bold text-white">Browse by Category</h2>
+        <h2 className="mb-8 text-3xl font-bold text-white">
+          Browse by Category
+        </h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {Object.entries(genreMap).slice(0, 12).map(([id, name]) => (
-            <div key={id} className="p-4 transition-all bg-gray-700 rounded-lg cursor-pointer hover:bg-red-600">
-              <div className="text-center">
-                <i className="mb-2 text-2xl fa-solid fa-film"></i>
-                <h3 className="text-sm font-medium text-white">{name}</h3>
+          {Object.entries(genreMap)
+            .slice(0, 12)
+            .map(([id, name]) => (
+              <div
+                key={id}
+                className="p-4 transition-all bg-gray-700 rounded-lg cursor-pointer hover:bg-red-600"
+              >
+                <div className="text-center">
+                  <i className="mb-2 text-2xl fa-solid fa-film"></i>
+                  <h3 className="text-sm font-medium text-white">{name}</h3>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 
       {/* Footer */}
       <footer className="px-6 py-8 text-center text-gray-400 bg-gray-900">
-        <p>© 2023 MovieFlix. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} StreamX. All rights reserved.</p>
       </footer>
     </div>
   );

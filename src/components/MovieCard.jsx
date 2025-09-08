@@ -9,7 +9,7 @@ export default function MovieCard({ movie }) {
   };
 
   return (
-    <div 
+    <div
       className="w-48 shadow-xl cursor-pointer card bg-base-100 h-72"
       onClick={handleClick}
     >

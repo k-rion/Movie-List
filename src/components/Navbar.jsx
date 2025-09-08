@@ -10,6 +10,11 @@ function Navbar({ onSearch }) {
     onSearch(term);
   };
 
+  const handleClearSearch = () => {
+    setTerm("");
+    onSearch("");
+  };
+
   return (
     <div className="flex items-center justify-between px-4 py-4 mx-auto shadow-lg navbar bg-base-100">
       <div>
@@ -25,16 +30,17 @@ function Navbar({ onSearch }) {
           </Link>
 
           {/* Navbar */}
-
           <div className="relative group">
-            <button className="font-medium text-white hover:text-red-400">Genre</button>
+            <button className="font-medium text-white hover:text-red-400">
+              Genre
+            </button>
 
             {/* Dropdown Panel */}
-            <div className="left-0 invisible mt-2 transition-all duration-300 bg-gray-800
+            <div
+              className="left-0 invisible mt-2 transition-all duration-300 bg-gray-800
                             opacity-0 absolute group-hover:opacity-100 group-hover:visible 
                             w-[640px] p-6 rounded-lg shadow-lg z-[9999]"
-              >
-                              
+            >
               <div className="grid grid-cols-3 gap-4 cursor-pointer">
                 {Object.entries(genreMap).map(([id, name]) => (
                   <Link
@@ -52,16 +58,29 @@ function Navbar({ onSearch }) {
       </div>
 
       <form onSubmit={handleSubmit} className="flex gap-4">
-        <div className="form-control">
+        <label className="flex items-center gap-2 input input-bordered">
           <input
             type="text"
+            className="grow"
             placeholder="Search"
-            className="w-24 input input-bordered md:w-auto"
             value={term}
             onChange={(e) => setTerm(e.target.value)}
           />
-        </div>
-        <button type="submit" className="btn bg-red-500/80">
+
+          {/* Show clear button only when there's text */}
+          {term && (
+            <button
+              type="button"
+              className="text-gray-600 hover:text-red-500"
+              onClick={handleClearSearch}
+            >
+              <i className="fa-classic fa-solid fa-xmark"></i>
+            </button>
+          )}
+        </label>
+
+        {/* Disable search button when input is empty */}
+        <button type="submit" className="btn bg-red-500/80" disabled={!term}>
           Search
         </button>
 

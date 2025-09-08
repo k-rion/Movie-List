@@ -33,7 +33,7 @@ function GenreMovies() {
     getMovies();
   }, [id]);
 
-  if (loading) return <p className="text-center text-lg">Loading movies...</p>;
+  if (loading) return <p className="text-lg text-center">Loading movies...</p>;
 
   return (
     <div className="p-6">
