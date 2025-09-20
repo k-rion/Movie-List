@@ -10,7 +10,7 @@ export default function MovieCard({ movie }) {
 
   return (
     <div
-      className="w-48 shadow-xl cursor-pointer card bg-base-100 h-72"
+      className="w-full shadow-xl cursor-pointer card bg-base-100"
       onClick={handleClick}
     >
       <div className="relative block overflow-hidden transition rounded shadow group hover:scale-105">
@@ -25,31 +25,27 @@ export default function MovieCard({ movie }) {
             No Image
           </div>
         )}
-
-        {/* Overlay with title (initially hidden) */}
+        {/* Overlay */}
         <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 bg-black/70 group-hover:opacity-100">
           <div className="flex flex-col items-center text-center">
-            <h2 className="px-2 text-lg font-bold text-center text-white">
+            <h2 className="px-2 text-sm font-bold text-white sm:text-base md:text-lg">
               {movie.title}
             </h2>
-            <p className="px-2 text-lg font-bold text-center text-white">
+            <p className="px-2 text-xs text-white sm:text-sm md:text-base">
               {movie.year}
             </p>
           </div>
 
+          {/* Genres */}
           <div className="absolute flex flex-wrap gap-1 bottom-2 right-2">
-            {movie.genres && movie.genres.length > 0 && (
-              <div className="flex flex-wrap justify-end gap-2 m-2">
-                {movie.genres.map((genre, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 text-xs text-white rounded-full bg-red-500/80"
-                  >
-                    {genre}
-                  </span>
-                ))}
-              </div>
-            )}
+            {movie.genres?.map((genre, index) => (
+              <span
+                key={index}
+                className="px-2 py-1 text-[10px] sm:text-xs text-white rounded-full bg-red-500/80"
+              >
+                {genre}
+              </span>
+            ))}
           </div>
         </div>
       </div>
